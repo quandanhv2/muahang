@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fbc2eb, #a6c1ee); /* Màu nền nhẹ nhàng như hoàng hôn */
+            color: #333; /* Màu chữ mặc định */
+        }
+
+        .container {
+            width: 800px;
+            margin: 20px auto;
+            border: 1px solid #000;
+            background-color: #fff8e1; /* Màu nền nhẹ cho khung sản phẩm */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(to right, #fbc2eb, #ff7eb9); /* Màu nền nhẹ nhàng */
+            color: #ffffff;
+            padding: 15px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .content img {
+            float: left;
+            margin-right: 20px;
+            width: 150px;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .content img:hover {
+            transform: scale(1.1);
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .content table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .content table td:first-child {
+            width: 150px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+            background-color: #ffb6c1; /* Màu nền nhẹ cho footer */
+            border-top: 2px solid #ff7eb9; /* Màu hồng nhẹ cho đường viền */
+        }
+
+        .price {
+            color: #ff4500; /* Màu đỏ cam cho giá sản phẩm */
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #ff7eb9, #fbc2eb);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #ff7eb9, #fbc2eb);
+            transform: translateY(-2px);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 2px solid #ff7eb9;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .popup h2 {
+            color: #ff7eb9;
+        }
+
+        .popup .close {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff7eb9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .popup .close:hover {
+            background: #f5a6c2;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .icon {
+            font-size: 30px;
+            margin: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .icon:hover {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <audio id="order-sound" src="y2mate.com - Erika German Song.mp3" auto></audio>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>Đặt mua thành công!</h2>
+        <p>Cảm ơn bạn đã đặt mua sản phẩm. Chúng tôi sẽ liên hệ với bạn sớm nhất.</p>
+        <button class="close" onclick="closePopup()">Đóng</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            GIÁO TRÌNH TIN HỌC CƠ BẢN
+        </div>
+        <div class="content">
+            <img id="product-img" src="anh/465727579_905808628431746_6501729906520931992_n.jpg" alt="Bìa sách">
+            <table>
+                <tr>
+                    <td>Tác giả:</td>
+                    <td>Phạm Công Anh</td>
+                </tr>
+                <tr>
+                    <td>Đồng tác giả:</td>
+                    <td>Lê Việt Nhân</td>
+                </tr>
+                <tr>
+                    <td>Hiệu đính:</td>
+                    <td>Hồng Phúc</td>
+                </tr>
+                <tr>
+                    <td>Chủ biên:</td>
+                    <td>Quách Tuấn Ngọc</td>
+                </tr>
+                <tr>
+                    <td>Nhà xuất bản:</td>
+                    <td>Nhà xuất bản Trẻ</td>
+                </tr>
+                <tr>
+                    <td>Chủ đề:</td>
+                    <td>Triết học-Chính trị</td>
+                </tr>
+            </table>
+            <h3>Nội dung của cuốn:</h3>
+            <p>
+                Tin Học Cơ Bản Windows XP gồm có 7 chương:
+                <br>Chương 1: Một số vấn đề cơ bản.
+                <br>Chương 2: Sử dụng nhanh thành công cựu và thanh thực đơn trong My Computer và Windows Explorer.
+                <br>Chương 3: Các thao tác trong Windows XP.
+                <br>Chương 4: Các thiết lập trong Windows XP.
+                <br>Chương 5: Các phím tắt.
+                <br>Chương 6: Hỏi và đáp các thắc mắc.
+                <br>Chương 7: Hỏi và đáp các thắc mắc.
+                <br>Xem trọn trong giới thiệu cuốn sách cùng bạn.
+            </p>
+        </div>
+        <div class="footer">
+            <p class="price">Giá bán: 26,000 VNĐ/Cuốn</p>
+            <a href="#" class="btn" id="order-btn">ĐẶT MUA</a>
+        </div>
+    </div>
+
+    <div class="icon-container">
+        <i class="fas fa-heart icon"></i>
+        <i class="fas fa-star icon"></i>
+        <i class="fas fa-thumbs-up icon"></i>
+    </div>
+
+    <script>
+        const orderBtn = document.getElementById("order-btn");
+        const productImg = document.getElementById("product-img");
+
+        orderBtn.addEventListener("click", function () {
+            showPopup();
+            // Thay đổi màu sắc của trang sau khi nhấn "Đặt Mua"
+            document.body.style.background = "linear-gradient(to bottom, #d32f2f, #000000)"; // Gradient đỏ xuống đen
+            document.body.style.color = "#ffffff"; // Chữ trắng
+
+            // Thay đổi màu nền của container và footer
+            const container = document.querySelector(".container");
+            container.style.backgroundColor = "#d32f2f"; // Nền đỏ
+
+            const footer = document.querySelector(".footer");
+            footer.style.backgroundColor = "#000000"; // Nền đen
+
+            // Thay đổi màu nút
+            orderBtn.style.backgroundColor = "#b71c1c"; // Nút màu đỏ đậm
+            orderBtn.style.color = "#ffffff"; // Chữ màu trắng
+
+            // Thay đổi hình ảnh
+            productImg.src = "https://icdn.dantri.com.vn/k:402ad9bfd8/2016/05/10/zing-hilter-3-1462821160400/buc-tuong-trum-phat-xit-hitler-duoc-ban-voi-gia-ky-luc.jpg"; // Đường dẫn ảnh mới
+        });
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            const sound = document.getElementById('order-sound');
+            sound.play();
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
